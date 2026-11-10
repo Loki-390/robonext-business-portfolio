@@ -116,14 +116,14 @@ export default function Footer({ onOpenDemoModal }) {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-cyan-400 shrink-0" />
-                <a href="mailto:enquiries@robonext.com" className="text-slate-300 hover:text-white transition-colors">
-                  enquiries@robonext.com
+                <a href="mailto:logeshs4605@gmail.com" className="text-slate-300 hover:text-white transition-colors">
+                  logeshs4605@gmail.com
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-cyan-400 shrink-0" />
-                <a href="tel:+919876543210" className="text-slate-300 hover:text-white transition-colors">
-                  +91 98765 43210
+                <a href="tel:+91 75984 10327" className="text-slate-300 hover:text-white transition-colors">
+                  +91 75984 10327
                 </a>
               </div>
               <div className="pt-2">

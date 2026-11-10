@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import logeshPhoto from '../assets/Logesh RoboNext.png';
+
 import { 
   Target, 
   Eye, 
@@ -162,21 +165,28 @@ export default function AboutUs({ onOpenDemoModal }) {
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
+
+            
             {/* Profile Avatar / Photo Card */}
-            <div className="lg:col-span-4 text-center">
-              <div className="w-48 h-48 mx-auto rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 p-1.5 shadow-xl">
-                <div className="w-full h-full bg-navy-900 rounded-xl flex flex-col items-center justify-center text-slate-300 space-y-2">
-                  <User className="w-16 h-16 text-cyan-400" />
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Founder Profile</span>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold text-white mt-4">Logesh</h3>
-              <p className="text-cyan-400 text-sm font-medium">Founder & Technical Lead</p>
-              <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs border border-blue-400/30">
-                <GraduationCap className="w-3.5 h-3.5" />
-                <span>B.Tech – Artificial Intelligence & Data Science</span>
-              </div>
-            </div>
+<div className="lg:col-span-4 text-center">
+  {/* Dedicated Portrait Photo Frame */}
+  <div className="relative w-56 sm:w-64 mx-auto aspect-[3/4] rounded-2xl overflow-hidden border-2 border-cyan-500/40 bg-navy-950 shadow-2xl shadow-cyan-500/20">
+    <img 
+      src={logeshPhoto} 
+      alt="Logesh - Founder & Technical Lead" 
+      className="w-full h-full object-cover object-top"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent pointer-events-none" />
+  </div>
+
+  <h3 className="text-2xl font-bold text-white mt-4">LOGESH</h3>
+  <p className="text-cyan-400 text-sm font-medium">Founder & Technical Lead</p>
+  <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs border border-blue-400/30">
+    <GraduationCap className="w-3.5 h-3.5" />
+    <span>B.Tech – Artificial Intelligence & Data Science</span>
+  </div>
+</div>
+
 
             {/* Founder Details */}
             <div className="lg:col-span-8 space-y-5">

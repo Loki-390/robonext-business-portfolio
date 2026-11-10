@@ -131,7 +131,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     required
                     value={formData.school_name}
                     onChange={handleChange}
-                    placeholder="e.g. St. Bede's Matriculation Hr Sec School"
+                    //placeholder="e.g. St. Bede's Matriculation Hr Sec School"
                     className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                   />
                 </div>
@@ -141,7 +141,7 @@ export default function DemoModal({ isOpen, onClose }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block font-semibold text-slate-700 mb-1">
-                    Principal / Contact Person <span className="text-rose-500">*</span>
+                    Your Name <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
                     <User className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
@@ -151,7 +151,7 @@ export default function DemoModal({ isOpen, onClose }) {
                       required
                       value={formData.contact_person}
                       onChange={handleChange}
-                      placeholder="e.g. Dr. R. Subramanian"
+                      //placeholder="e.g. Dr. R. Subramanian"
                       className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
@@ -173,6 +173,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     <option value="Academic Coordinator">Academic Coordinator</option>
                     <option value="Science Department Head">Science Department Head</option>
                     <option value="Computer Science Head">Computer Science Head</option>
+                    <option value="Student">Student</option>
                     <option value="Other">Other Representative</option>
                   </select>
                 </div>
@@ -192,7 +193,7 @@ export default function DemoModal({ isOpen, onClose }) {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="e.g. principal@school.edu.in"
+                      //placeholder="e.g. principal@school.edu.in"
                       className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
@@ -210,7 +211,7 @@ export default function DemoModal({ isOpen, onClose }) {
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="e.g. +91 98401 23456"
+                      //placeholder="e.g. +91 98401 23456"
                       className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>
@@ -231,7 +232,7 @@ export default function DemoModal({ isOpen, onClose }) {
                       required
                       value={formData.location}
                       onChange={handleChange}
-                      placeholder="e.g. Velachery / Adyar, Chennai"
+                      //placeholder="e.g. Velachery / Adyar, Chennai"
                       className="w-full pl-9 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                     />
                   </div>

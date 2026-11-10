@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import obstacleAvoiderImg from '../assets/Obstacle Avoider Robot.jpg';
+import lineFollowerImg from '../assets/Line Follower Robot.png';
+import bluetoothController from '../assets/Bluetooth-Controlled Smart Rover.png';
+import robotSoccerImg from '../assets/Robot Soccer.png';
+import humanoidRobotImg from '../assets/Humanoid Robot.png';
+
 import { 
-  Layers, 
-  Cpu, 
-  Code, 
-  Video, 
+  Zap, 
   CheckCircle2, 
-  ExternalLink, 
   Play, 
   X, 
-  Zap, 
-  Radio, 
-  Droplet, 
-  Trash2,
-  Sparkles
+  Cpu
 } from 'lucide-react';
 import api from '../services/api';
 
@@ -28,6 +26,7 @@ export default function Projects({ onOpenDemoModal }) {
       id: 1,
       project_name: "Obstacle Avoider Robot",
       category: "Autonomous Robotics",
+      image: obstacleAvoiderImg,
       description: "A robotic vehicle that uses ultrasonic sound waves to detect barriers in front of it and automatically recalculates wheel rotation to avoid collisions without human intervention.",
       technologies: "Arduino Uno, HC-SR04 Ultrasonic Sensor, L298N Dual H-Bridge Motor Driver, Geared DC Motors, Chassis",
       working_principle: "The ultrasonic sensor transmits a 40kHz sonic burst and counts the microseconds until the echo returns. Distance = (time × speed of sound) / 2. If distance < 20cm, microcontroller stops both motors, reverses, and steers away.",
@@ -39,6 +38,7 @@ export default function Projects({ onOpenDemoModal }) {
       id: 2,
       project_name: "Line Follower Robot",
       category: "Sensor Robotics",
+      image: lineFollowerImg,
       description: "An autonomous path-tracking mobile robot that follows a high-contrast black line track on a white surface using dual photodiode infrared reflectance sensors.",
       technologies: "Arduino Uno, Dual IR TCRT5000 Sensor Modules, Motor Driver Shield, 6V High-Torque Motors",
       working_principle: "Infrared emitters beam light downwards. Black surface absorbs infrared photons (low reflection), while white surface reflects light back (high reflection). Differential comparator logic adjusts left and right motor speeds in real-time.",
@@ -50,6 +50,7 @@ export default function Projects({ onOpenDemoModal }) {
       id: 3,
       project_name: "Bluetooth-Controlled Smart Rover",
       category: "Wireless Systems",
+      image: bluetoothController,
       description: "A wirelessly tele-operated robotic vehicle commanded directly from a paired Android or iOS mobile phone application over serial RF Bluetooth.",
       technologies: "Arduino Uno, HC-05 Bluetooth Module, L298N Motor Driver, Bluetooth Controller Mobile App",
       working_principle: "Mobile phone transmits single-character UART commands ('F', 'B', 'L', 'R') at 9600 baud rate. The HC-05 module passes data to Arduino's hardware serial pins, which map characters to corresponding motor driver transistor switches.",
@@ -59,24 +60,26 @@ export default function Projects({ onOpenDemoModal }) {
     },
     {
       id: 4,
-      project_name: "Smart Contactless Dustbin",
-      category: "Smart Automation",
-      description: "A hygienic automated waste disposal system that senses incoming hands or discarded items and automatically lifts its lid using a precision servo motor.",
-      technologies: "Arduino Nano, HC-SR04 Ultrasonic Sensor, SG90 Micro Servo Motor, 9V Power Supply",
-      working_principle: "Continuously pulses sonar waves. When a hand is sensed within 15 centimeters, the microcontroller sends PWM pulses to rotate the servo horn from 0 to 90 degrees, delays 4 seconds for disposal, and gently closes.",
-      learning_outcomes: "Angular servo positioning (PWM pulses), real-world civic health engineering, automated mechanical linkages.",
-      badge: "Civic Automation",
+      project_name: "Robot Soccer",
+      category: "Wireless Systems",
+      image: robotSoccerImg,
+      description: "An interactive, agile mobile robot designed to compete in robotic soccer matches. It utilizes a custom-designed front bumper and scoop mechanism to capture, control, and shoot a small ball while maneuvering around opponents.",
+      technologies: "Arduino Uno, HC-05 Bluetooth Module (or RF Receiver), L298N Dual H-Bridge Motor Driver, High-Torque Geared DC Motors, Custom Dribbler/Scoop Attachment, Li-ion Rechargeable Battery Pack",
+      working_principle: "The robot receives real-time wireless drive and gameplay commands (Forward, Reverse, Left, Right, and Spin Kick) from a custom mobile app or remote controller. A specialized front mechanical scoop is designed with inward-curved guides to cradle and corral the rolling ball. Dual H-Bridge motor driver circuits dynamically change motor polarity to execute rapid pivoting, dribbling, and shot-making movements.",
+      learning_outcomes: "Mechanical design for ball capture (scoops), wireless controller integration (serial UART packets), remote speed and torque control (PWM), real-time game strategy execution, and motor polarity manipulation.",
+      badge: "Interactive Match Ready",
       status: "published"
     },
     {
       id: 5,
-      project_name: "Smart Soil Irrigation System",
-      category: "IoT & Agriculture",
-      description: "An automated agricultural IoT prototype that continuously reads soil volumetric water moisture and switches a submersible water pump relay when dryness is detected.",
-      technologies: "Arduino Uno, Soil Moisture Conductivity Probe, 5V Electromechanical Relay, Submersible Mini Pump",
-      working_principle: "Measures electrical resistance across two exposed soil prongs. Dry soil increases resistance (drops voltage reading). When analog voltage crosses the calibrated dryness threshold, the relay triggers the 5V pump circuit.",
-      learning_outcomes: "Environmental sensing, analog-to-digital conversion (ADC), safe relay switching of higher current loads, water conservation logic.",
-      badge: "Smart Farming",
+      project_name: "Humanoid Robot",
+      category: "Bipedal & Advanced Robotics",
+      image: humanoidRobotImg,
+      description: "A compact bipedal humanoid robot designed to mimic natural human gestures and locomotion. It features multi-jointed legs and arms, enabling it to wave, detect its environment, and execute balancing routines, serving as an advanced showcase of multi-servo system integration.",
+      technologies: "Arduino Nano/Uno, 8x SG90 (or MG90S) Micro Servo Motors, 16-Channel Servo Driver Shield (PCA9685), HC-SR04 Ultrasonic Sensor, Bipedal Black Acrylic Chassis & Brackets, Rechargeable 7.4V Li-ion Battery pack",
+      working_principle: "Multiple servomotors (joints) coordinate simultaneously to alter the robot's center of gravity without falling. An Arduino, via an I2C servo expansion shield, sends specific pulse-width modulation (PWM) commands to control each joint's angles dynamically. It uses a front-facing ultrasonic sensor in the 'head' to calculate real-world obstacle distances, triggering responsive programs (e.g., stopping or changing paths) when barriers are near.",
+      learning_outcomes: "Multi-joint coordinate geometry, multi-servo calibration, I2C bus serial communication, PWM joint angle mapping, algorithm design for gait and gesture sequences, and center-of-gravity physics.",
+      badge: "Flagship Project",
       status: "published"
     }
   ];
@@ -85,7 +88,7 @@ export default function Projects({ onOpenDemoModal }) {
     async function fetchProjects() {
       try {
         const res = await api.get('/projects');
-        if (res.data.success && res.data.data.length > 0) {
+        if (res.data?.success && res.data?.data?.length > 0) {
           setProjects(res.data.data);
         }
       } catch (err) {
@@ -146,37 +149,47 @@ export default function Projects({ onOpenDemoModal }) {
           {filteredProjects.map((project, idx) => (
             <div 
               key={project.id || idx}
-              className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between"
+              className="bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
             >
-              {/* Card Header & Category */}
               <div>
-                {/* Visual Placeholder Header */}
-                <div className="h-52 bg-gradient-to-tr from-navy-900 to-navy-850 p-6 flex flex-col justify-between relative overflow-hidden text-white border-b border-navy-800">
-                  <div className="absolute right-4 bottom-2 opacity-15">
-                    <Cpu className="w-32 h-32 text-cyan-400" />
-                  </div>
-                  <div className="flex items-center justify-between relative z-10">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-cyan-300 border border-blue-400/30">
+                {/* Clean Photo Container */}
+
+                <div className="relative w-full h-72 sm:h-80 bg-slate-900 overflow-hidden flex items-center justify-center">
+                  
+                  {project.image ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.project_name} 
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-tr from-navy-950 to-navy-900 flex items-center justify-center">
+                      <Cpu className="w-16 h-16 text-cyan-400/30" />
+                    </div>
+                  )}
+
+                  {/* Floating Badges pinned to corners */}
+                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-navy-950/85 backdrop-blur-md text-cyan-300 border border-cyan-500/30 shadow-md">
                       {project.category}
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[11px] font-mono text-slate-200 bg-navy-950/85 backdrop-blur-md px-2.5 py-1 rounded border border-white/10 shadow-md">
                       Hardware Demo #{idx + 1}
                     </span>
                   </div>
+                </div>
 
-                  <div className="relative z-10 space-y-1">
-                    <h3 className="text-2xl font-extrabold text-white tracking-tight">
-                      {project.project_name}
-                    </h3>
-                    <p className="text-xs text-slate-300 font-mono">
-                      Working Demonstration Model
-                    </p>
-                  </div>
+                {/* Clear Title Bar (Below the Photo) */}
+                <div className="p-6 pb-2 border-b border-slate-100 bg-white">
+                  <h3 className="text-2xl font-extrabold text-navy-950 tracking-tight">
+                    {project.project_name}
+                  </h3>
+                  <p className="text-xs text-blue-600 font-mono font-semibold mt-1">
+                    Working Demonstration Model
+                  </p>
                 </div>
 
                 {/* Details */}
-                <div className="p-6 sm:p-8 space-y-6">
-                  
+                <div className="p-6 sm:p-8 space-y-6 pt-4">
                   {/* Description */}
                   <p className="text-slate-600 text-sm leading-relaxed">
                     {project.description}
@@ -213,7 +226,6 @@ export default function Projects({ onOpenDemoModal }) {
                       {project.learning_outcomes}
                     </p>
                   </div>
-
                 </div>
               </div>
 
@@ -239,7 +251,7 @@ export default function Projects({ onOpenDemoModal }) {
         </div>
       </section>
 
-      {/* Video / Details Modal */}
+      {/* Details Modal */}
       {selectedVideo && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-navy-950/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 space-y-4 border border-slate-200">
@@ -251,11 +263,22 @@ export default function Projects({ onOpenDemoModal }) {
             </div>
             
             {/* Visual representation */}
-            <div className="aspect-video bg-navy-900 rounded-xl flex flex-col items-center justify-center text-white p-6 text-center space-y-3">
-              <Play className="w-12 h-12 text-cyan-400 animate-pulse" />
-              <div>
-                <p className="font-bold text-sm">Hardware Demonstration Demonstration Video</p>
-                <p className="text-xs text-slate-400 max-w-sm mt-1">
+            <div className="aspect-video relative rounded-xl overflow-hidden bg-navy-950 border border-slate-200">
+              {selectedVideo.image ? (
+                <img 
+                  src={selectedVideo.image} 
+                  alt={selectedVideo.project_name} 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center text-white p-6 text-center space-y-3">
+                  <Play className="w-12 h-12 text-cyan-400 animate-pulse" />
+                  <p className="font-bold text-sm">Hardware Demonstration Video</p>
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/30 to-transparent flex flex-col justify-end p-4 text-white">
+                <p className="font-bold text-sm">Working Hardware Model</p>
+                <p className="text-xs text-slate-300 mt-0.5">
                   Actual live demonstration of this working model is brought directly to your school auditorium or science laboratory during the free demonstration session.
                 </p>
               </div>
