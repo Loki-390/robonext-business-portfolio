@@ -13,12 +13,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS configuration
+// 1. Trust Render reverse proxy for rate-limiting & IP validation
+app.set('trust proxy', 1);
+
+// 2. CORS configuration (Includes your live Render domain)
 const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:3000',
   'http://localhost:5000',
+  'https://robonext-backend.onrender.com',
   process.env.CLIENT_URL
 ].filter(Boolean);
 
@@ -89,17 +93,16 @@ async function startServer() {
   try {
     await initDatabase();
 
-    // Start background automation engine
     const followupInterval = Number(process.env.FOLLOWUP_CHECK_INTERVAL_HOURS) || 12;
     startAutomationWorker(followupInterval);
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`====================================================`);
       console.log(`🚀 RoboNext STEM Full-Stack Server Running`);
-      console.log(`🌐 Local Web Application: http://localhost:${PORT}`);
-      console.log(`📡 REST API Health:       http://localhost:${PORT}/api/health`);
-      console.log(`🔐 Admin Dashboard:       http://localhost:${PORT}/admin/login`);
-      console.log(`🗄️ Database Status:       ${getDbStatus().target}`);
+      console.log(`🌐 Application URL: https://robonext-backend.onrender.com`);
+      console.log(`📡 REST API Health: /api/health`);
+      console.log(`🔐 Admin Dashboard: /admin/login`);
+      console.log(`🗄️ Database Status: ${getDbStatus().target}`);
       console.log(`====================================================`);
     });
   } catch (err) {
