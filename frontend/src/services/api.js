@@ -1,13 +1,22 @@
 // Standard REST API client with JWT interceptors and identical Axios-compatible interface
 
+const rawApiUrl = import.meta.env.VITE_API_URL || 'https://robonext-backend.onrender.com';
+const normalizedBaseURL = rawApiUrl.endsWith('/api')
+  ? rawApiUrl
+  : `${rawApiUrl.replace(/\/$/, '')}/api`;
+
 class ApiClient {
-  constructor(baseURL = '/api') {
+  constructor(baseURL = normalizedBaseURL) {
     this.baseURL = baseURL;
   }
 
   async request(endpoint, options = {}) {
-    const url = new URL(this.baseURL + (endpoint.startsWith('/') ? endpoint : `/${endpoint}`), window.location.origin);
-    
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const fullPath = `${this.baseURL}${cleanEndpoint}`;
+    const url = fullPath.startsWith('http')
+      ? new URL(fullPath)
+      : new URL(fullPath, window.location.origin);
+
     // Append query params if present
     if (options.params) {
       Object.entries(options.params).forEach(([key, val]) => {
@@ -81,5 +90,5 @@ class ApiClient {
   }
 }
 
-const api = new ApiClient('/api');
+const api = new ApiClient(normalizedBaseURL);
 export default api;
