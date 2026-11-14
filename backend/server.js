@@ -27,19 +27,22 @@ const allowedOrigins = [
   process.env.CLIENT_URL
 ].filter(Boolean);
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
-      return callback(null, true);
+    // Allow requests with no origin (mobile apps, Postman, server-to-server) or listed origins
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.robonext-business-portfolio.pages.dev')) {
+      callback(null, true);
+    } else {
+      callback(null, false);
     }
-    return callback(new Error('CORS policy: Not allowed by Access-Control-Allow-Origin'));
   },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
-}));
+};
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Apply general API rate limiter
 app.use('/api/', generalApiLimiter);

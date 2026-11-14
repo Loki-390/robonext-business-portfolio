@@ -44,11 +44,11 @@ async function initDatabase() {
   try {
     console.log('[DB] Connected successfully to TiDB Cloud (robotics_portfolio)');
 
-    // Ensure admin_users table exists
+    // Create admin_users table if it doesn't exist
     await connection.query(`
       CREATE TABLE IF NOT EXISTS admin_users (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(100) NOT NULL,
+        username VARCHAR(100) NOT NULL DEFAULT 'Admin',
         email VARCHAR(150) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL,
         role VARCHAR(50) DEFAULT 'superadmin',
@@ -56,12 +56,11 @@ async function initDatabase() {
       )
     `);
 
-    // Detect actual password column name in case table already existed with 'password'
+    // Inspect existing columns safely so INSERT/UPDATE never fails on schema differences
     const [columns] = await connection.query(`SHOW COLUMNS FROM admin_users`);
-    const columnNames = columns.map((c) => c.Field);
-    const pwdCol = columnNames.includes('password_hash') ? 'password_hash' : 'password';
+    const colNames = columns.map((c) => c.Field);
+    const pwdCol = colNames.includes('password_hash') ? 'password_hash' : 'password';
 
-    // Seed or update default admin credentials (admin@robonext.com / Admin@123)
     const hashedPassword = await bcrypt.hash('Admin@123', 10);
     const [existing] = await connection.query(
       'SELECT id FROM admin_users WHERE email = ?',
@@ -69,10 +68,22 @@ async function initDatabase() {
     );
 
     if (existing.length === 0) {
-      await connection.query(
-        `INSERT INTO admin_users (username, email, ${pwdCol}, role) VALUES (?, ?, ?, ?)`,
-        ['Admin', 'admin@robonext.com', hashedPassword, 'superadmin']
-      );
+      if (colNames.includes('username') && colNames.includes('role')) {
+        await connection.query(
+          `INSERT INTO admin_users (username, email, ${pwdCol}, role) VALUES (?, ?, ?, ?)`,
+          ['Admin', 'admin@robonext.com', hashedPassword, 'superadmin']
+        );
+      } else if (colNames.includes('username')) {
+        await connection.query(
+          `INSERT INTO admin_users (username, email, ${pwdCol}) VALUES (?, ?, ?)`,
+          ['Admin', 'admin@robonext.com', hashedPassword]
+        );
+      } else {
+        await connection.query(
+          `INSERT INTO admin_users (email, ${pwdCol}) VALUES (?, ?)`,
+          ['admin@robonext.com', hashedPassword]
+        );
+      }
       console.log('[DB] Default admin account seeded: admin@robonext.com');
     } else {
       await connection.query(
@@ -81,6 +92,8 @@ async function initDatabase() {
       );
       console.log('[DB] Default admin credentials verified: admin@robonext.com');
     }
+  } catch (dbErr) {
+    console.error('[DB INIT WARNING]:', dbErr.message);
   } finally {
     connection.release();
   }
