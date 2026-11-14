@@ -13,6 +13,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// CRITICAL: Must be at the top before routes so req.body parses JSON properly
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // 1. Trust Render reverse proxy for rate-limiting & IP validation
 app.set('trust proxy', 1);
 
