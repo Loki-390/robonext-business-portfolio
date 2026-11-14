@@ -123,8 +123,8 @@ export default function Contact() {
                 <Phone className="w-5 h-5 text-blue-600 shrink-0" />
                 <div>
                   <strong className="block text-slate-800 font-semibold">Telephone</strong>
-                  <a href="tel:+919876543210" className="text-blue-600 font-mono hover:underline">
-                    +91 98765 43210
+                  <a href="tel:+917598410327" className="text-blue-600 font-mono hover:underline">
+                    +91 75984 10327
                   </a>
                 </div>
               </div>
@@ -133,8 +133,8 @@ export default function Contact() {
                 <Mail className="w-5 h-5 text-blue-600 shrink-0" />
                 <div>
                   <strong className="block text-slate-800 font-semibold">Official Inquiries Email</strong>
-                  <a href="mailto:enquiries@robonext.com" className="text-blue-600 hover:underline">
-                    enquiries@robonext.com
+                  <a href="mailto:logeshs4605@gmail.com" className="text-blue-600 hover:underline">
+                    logeshs4605@gmail.com
                   </a>
                 </div>
               </div>
@@ -143,7 +143,7 @@ export default function Contact() {
             {/* Quick WhatsApp / Direct Actions */}
             <div className="space-y-3">
               <a
-                href="https://wa.me/919876543210?text=Hello%20RoboNext%20STEM,%20we%20are%20interested%20in%20a%20Free%20Robotics%20Demonstration%20for%20our%20school."
+                href="https://wa.me/917598410327?text=Hello%20RoboNext%20STEM,%20we%20are%20interested%20in%20a%20Free%20Robotics%20Demonstration%20for%20our%20school."
                 target="_blank"
                 rel="noreferrer"
                 className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md transition-all text-sm"
@@ -153,7 +153,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="mailto:enquiries@robonext.com?subject=School%20Robotics%20Demonstration%20Inquiry"
+                href="mailto:logeshs4605@gmail.com?subject=School%20Robotics%20Demonstration%20Inquiry"
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 shadow-sm transition-all text-sm"
               >
                 <Mail className="w-4 h-4 text-slate-500" />
@@ -224,7 +224,7 @@ export default function Contact() {
                         required
                         value={formData.school_name}
                         onChange={handleChange}
-                        placeholder="e.g. St. Bede's Matriculation Higher Secondary School"
+                        placeholder=" "
                         className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                       />
                     </div>
@@ -244,7 +244,7 @@ export default function Contact() {
                           required
                           value={formData.contact_person}
                           onChange={handleChange}
-                          placeholder="e.g. Dr. K. Rajasekhar"
+                          placeholder=" "
                           className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                         />
                       </div>
@@ -266,6 +266,7 @@ export default function Contact() {
                         <option value="Academic Coordinator">Academic Coordinator</option>
                         <option value="Science Department Head">Science Department Head</option>
                         <option value="Computer Science Head">Computer Science Head</option>
+                        <option value="Student">Student</option>
                         <option value="Other">Other Representative</option>
                       </select>
                     </div>
@@ -285,7 +286,7 @@ export default function Contact() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="principal@school.edu.in"
+                          placeholder=" "
                           className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                         />
                       </div>
@@ -303,7 +304,7 @@ export default function Contact() {
                           required
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="+91 98401 23456"
+                          placeholder=" "
                           className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                         />
                       </div>
@@ -324,7 +325,7 @@ export default function Contact() {
                           required
                           value={formData.location}
                           onChange={handleChange}
-                          placeholder="e.g. Velachery / Adyar, Chennai"
+                          placeholder=" "
                           className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                         />
                       </div>
@@ -364,7 +365,7 @@ export default function Contact() {
                           name="student_strength"
                           value={formData.student_strength}
                           onChange={handleChange}
-                          placeholder="e.g. 75 students"
+                          placeholder=" "
                           className="w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                         />
                       </div>
@@ -397,7 +398,7 @@ export default function Contact() {
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="e.g. Would like the demo in our assembly hall or science lab during 6th period. Interested in obstacle avoidance."
+                      placeholder=" "
                       className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                     ></textarea>
                   </div>

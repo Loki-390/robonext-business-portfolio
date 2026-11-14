@@ -23,6 +23,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5000',
   'https://robonext-backend.onrender.com',
+  'https://robonext-business-portfolio.pages.dev',
   process.env.CLIENT_URL
 ].filter(Boolean);
 
