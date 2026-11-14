@@ -23,7 +23,8 @@ async function login(req, res) {
       });
     }
 
-    const isMatch = await User.comparePassword(password, user.password_hash);
+    const storedHash = user.password_hash || user.password;
+    const isMatch = await User.comparePassword(password, storedHash);
     if (!isMatch) {
       return res.status(401).json({
         success: false,
