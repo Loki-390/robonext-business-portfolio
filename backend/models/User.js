@@ -8,7 +8,7 @@ class User {
     const user = rows[0] || null;
 
     if (user) {
-      // Normalize password hash property so both 'password' and 'password_hash' work everywhere
+      // Handle both 'password' and 'password_hash' column variations safely
       const hash = user.password_hash || user.password;
       user.password_hash = hash;
       user.password = hash;
