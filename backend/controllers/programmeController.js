@@ -5,7 +5,10 @@ async function getAllProgrammes(req, res) {
   try {
     const isAdmin = Boolean(req.user);
     const status = isAdmin ? req.query.status : 'active';
-    const programmes = await Programme.findAll({ status });
+    let programmes = await Programme.findAll({ status });
+    if (Array.isArray(programmes) && programmes.length === 2 && Array.isArray(programmes[0])) {
+      programmes = programmes[0];
+    }
     return res.status(200).json({ success: true, count: programmes.length, data: programmes });
   } catch (err) {
     console.error('[Get Programmes Error]:', err);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, CheckCircle, AlertCircle, Loader2, Calendar, MapPin, School, User, Mail, Phone, Users, BookOpen, Send } from 'lucide-react';
 import api from '../services/api';
+import RoboWakeLoader from './RoboWakeLoader';
 
 export default function DemoModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -330,13 +331,13 @@ export default function DemoModal({ isOpen, onClose }) {
                   )}
                 </button>
 
-                 {/* 🚀 Waking-Up Animation / Popup Message */}
-                      {loading && (
-                        <div className="flex items-center gap-3 text-blue-300 text-xs sm:text-sm animate-pulse bg-blue-950/60 p-3 rounded-lg border border-blue-500/30">
-                          <Loader2 className="w-5 h-5 animate-spin text-blue-400 shrink-0" />
-                          <span>Submitting request... (Server is waking up from sleep mode, please wait ~30 seconds).</span>
-                        </div>
-                      )}
+                {/* 🚀 Robotics-Themed Waking-Up Animation Component */}
+                {loading && (
+                  <RoboWakeLoader
+                    title="Submitting Demonstration Request..."
+                    subtitle="Robot core booting up... Please wait a moment while the server wakes from sleep."
+                  />
+                )}
 
                       
                 <p className="text-center text-[11px] text-slate-500 mt-2">

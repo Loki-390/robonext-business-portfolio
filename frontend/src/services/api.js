@@ -64,6 +64,11 @@ class ApiClient {
         throw error;
       }
 
+      // Defensive normalization: unwrap mysql2 [rows, fields] tuple if present
+      if (data && data.success && Array.isArray(data.data) && data.data.length === 2 && Array.isArray(data.data[0])) {
+        data.data = data.data[0];
+      }
+
       return { data, status: response.status, ok: true };
     } catch (err) {
       if (!err.response) {

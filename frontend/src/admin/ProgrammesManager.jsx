@@ -181,16 +181,20 @@ export default function ProgrammesManager() {
                   </span>
                   <span className="text-xs font-semibold text-blue-600 flex items-center gap-1">
                     <Users className="w-3.5 h-3.5" />
-                    {prog.target_classes}
+                    {prog.target_classes || prog.classes || 'Classes 6–9'}
                   </span>
                 </div>
 
-                <h3 className="font-bold text-lg text-navy-900">{prog.programme_name}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">{prog.description}</p>
+                <h3 className="font-bold text-lg text-navy-900">
+                  {prog.programme_name || prog.name || prog.title || 'Robotics Programme'}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                  {prog.description || 'Hands-on experiential robotics and STEM learning module.'}
+                </p>
 
                 <div className="pt-2 text-xs text-slate-500 space-y-1">
-                  <p><strong>Duration:</strong> {prog.duration || 'Not set'}</p>
-                  <p className="line-clamp-2"><strong>Topics:</strong> {prog.topics || 'None listed'}</p>
+                  <p><strong>Duration:</strong> {prog.duration || '4 Weeks'}</p>
+                  <p className="line-clamp-2"><strong>Topics:</strong> {prog.topics || 'Hardware, Electronics, Coding, Project Assembly'}</p>
                 </div>
               </div>
 

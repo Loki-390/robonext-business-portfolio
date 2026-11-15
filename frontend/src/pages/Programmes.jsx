@@ -127,16 +127,18 @@ export default function Programmes({ onOpenDemoModal }) {
                   <span className="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-sm">
                     0{index + 1}
                   </span>
-                  <h3 className="text-xl font-bold text-navy-900">{prog.programme_name}</h3>
+                  <h3 className="text-xl font-bold text-navy-900">
+                    {prog.programme_name || prog.name || prog.title || `Programme ${index + 1}`}
+                  </h3>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
                     <Users className="w-3.5 h-3.5" />
-                    {prog.target_classes}
+                    {prog.target_classes || prog.classes || 'Classes 6–9'}
                   </span>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-200 text-slate-800">
                     <Clock className="w-3.5 h-3.5" />
-                    {prog.duration}
+                    {prog.duration || 'Flexible Format'}
                   </span>
                 </div>
               </div>
@@ -144,7 +146,7 @@ export default function Programmes({ onOpenDemoModal }) {
               {/* Card Body */}
               <div className="p-6 sm:p-8 space-y-6">
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  {prog.description}
+                  {prog.description || 'Comprehensive hands-on robotics and STEM curriculum.'}
                 </p>
 
                 {/* Topics Covered */}

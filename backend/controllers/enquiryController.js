@@ -86,7 +86,11 @@ async function createEnquiry(req, res) {
 async function getAllEnquiries(req, res) {
   try {
     const { status, search } = req.query;
-    const enquiries = await Enquiry.findAll({ status, search });
+    let enquiries = await Enquiry.findAll({ status, search });
+    // Defensive check: if mysql2 returned [rows, fields]
+    if (Array.isArray(enquiries) && enquiries.length === 2 && Array.isArray(enquiries[0])) {
+      enquiries = enquiries[0];
+    }
     return res.status(200).json({
       success: true,
       count: enquiries.length,

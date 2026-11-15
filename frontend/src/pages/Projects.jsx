@@ -263,22 +263,24 @@ export default function Projects({ onOpenDemoModal }) {
             </div>
             
             {/* Visual representation */}
-            <div className="aspect-video relative rounded-xl overflow-hidden bg-navy-950 border border-slate-200">
-              {selectedVideo.image ? (
-                <img 
-                  src={selectedVideo.image} 
-                  alt={selectedVideo.project_name} 
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center text-white p-6 text-center space-y-3">
-                  <Play className="w-12 h-12 text-cyan-400 animate-pulse" />
-                  <p className="font-bold text-sm">Hardware Demonstration Video</p>
-                </div>
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/30 to-transparent flex flex-col justify-end p-4 text-white">
-                <p className="font-bold text-sm">Working Hardware Model</p>
-                <p className="text-xs text-slate-300 mt-0.5">
+            <div className="rounded-xl overflow-hidden bg-navy-950 border border-slate-200">
+              <div className="aspect-video relative">
+                {selectedVideo.image ? (
+                  <img 
+                    src={selectedVideo.image} 
+                    alt={selectedVideo.project_name} 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center text-white p-6 text-center space-y-3">
+                    <Play className="w-12 h-12 text-cyan-400 animate-pulse" />
+                    <p className="font-bold text-sm">Hardware Demonstration Video</p>
+                  </div>
+                )}
+              </div>
+              <div className="bg-navy-900 p-3.5 border-t border-navy-800 text-white">
+                <p className="font-bold text-xs sm:text-sm text-cyan-400">Working Hardware Model</p>
+                <p className="text-[11px] sm:text-xs text-slate-300 mt-1 leading-relaxed">
                   Actual live demonstration of this working model is brought directly to your school auditorium or science laboratory during the free demonstration session.
                 </p>
               </div>

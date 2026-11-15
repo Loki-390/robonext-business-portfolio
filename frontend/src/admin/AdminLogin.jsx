@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Lock, Mail, Loader2, AlertCircle, Cpu, ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import RoboWakeLoader from '../components/RoboWakeLoader';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('admin@robonext.com');
@@ -35,6 +36,12 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-navy-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-slate-100">
+      {loading && (
+        <RoboWakeLoader
+          title="Admin Core Authenticating..."
+          subtitle="Robot core booting up... Please wait a moment while the server wakes from sleep."
+        />
+      )}
       
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
         <div className="w-14 h-14 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-2xl flex items-center justify-center mx-auto shadow-xl shadow-blue-500/30">

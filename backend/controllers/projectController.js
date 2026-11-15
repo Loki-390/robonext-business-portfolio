@@ -5,7 +5,10 @@ async function getAllProjects(req, res) {
   try {
     const isAdmin = Boolean(req.user);
     const status = isAdmin ? req.query.status : 'published';
-    const projects = await Project.findAll({ status });
+    let projects = await Project.findAll({ status });
+    if (Array.isArray(projects) && projects.length === 2 && Array.isArray(projects[0])) {
+      projects = projects[0];
+    }
     return res.status(200).json({ success: true, count: projects.length, data: projects });
   } catch (err) {
     console.error('[Get Projects Error]:', err);

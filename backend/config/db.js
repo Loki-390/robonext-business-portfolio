@@ -112,7 +112,13 @@ module.exports = {
   pool,
   initDatabase,
   getDbStatus,
-  query: (...args) => pool.query(...args),
-  execute: (...args) => pool.execute(...args),
+  query: async (...args) => {
+    const [result] = await pool.query(...args);
+    return result;
+  },
+  execute: async (...args) => {
+    const [result] = await pool.execute(...args);
+    return result;
+  },
   getConnection: () => pool.getConnection()
 };

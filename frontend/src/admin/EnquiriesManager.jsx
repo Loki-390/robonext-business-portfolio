@@ -208,8 +208,13 @@ export default function EnquiriesManager() {
               {loading ? (
                 <tr>
                   <td colSpan="6" className="py-12 text-center text-slate-400">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-blue-600 mb-2" />
-                    <span>Loading enquiries...</span>
+                    <div className="flex flex-col items-center justify-center space-y-2">
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                        <Loader2 className="w-6 h-6 animate-spin" />
+                      </div>
+                      <span className="font-semibold text-slate-700 text-sm">Retrieving School Enquiries...</span>
+                      <span className="text-xs text-slate-400 max-w-sm">Synchronizing with TiDB database cluster. If server was idle, this may take ~20–30s.</span>
+                    </div>
                   </td>
                 </tr>
               ) : enquiries.length === 0 ? (
@@ -219,61 +224,78 @@ export default function EnquiriesManager() {
                   </td>
                 </tr>
               ) : (
-                enquiries.map((enq) => (
-                  <tr key={enq.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="py-3.5 px-4">
-                      <strong className="block font-bold text-navy-900 text-sm">{enq.school_name}</strong>
-                      <span className="text-slate-500 flex items-center gap-1 mt-0.5">
-                        <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
-                        {enq.location}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span className="font-semibold text-slate-900 block">{enq.contact_person}</span>
-                      <span className="text-slate-500 text-[11px] block">{enq.designation}</span>
-                      <a href={`tel:${enq.phone}`} className="text-blue-600 hover:underline text-[11px] block">
-                        {enq.phone}
-                      </a>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span className="block font-medium text-slate-800">{enq.classes_interested || 'Classes 6–9'}</span>
-                      <span className="text-slate-400 text-[11px]">
-                        {enq.student_strength ? `${enq.student_strength} students` : 'Strength flexible'}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span className="font-mono text-slate-700 block">
-                        {enq.preferred_date ? new Date(enq.preferred_date).toLocaleDateString() : 'Flexible'}
-                      </span>
-                      <span className="text-[10px] text-slate-400">
-                        Received {new Date(enq.created_at).toLocaleDateString()}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4">
-                      <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-bold border ${getStatusBadge(enq.enquiry_status)}`}>
-                        {enq.enquiry_status}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
-                        <button
-                          onClick={() => openViewModal(enq)}
-                          className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                          title="View & Edit Status"
-                        >
-                          <Edit3 className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(enq.id, enq.school_name)}
-                          className="p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
-                          title="Delete Record"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                enquiries.map((enq) => {
+                  const sName = enq.school_name || enq.schoolName || enq.school || 'Unnamed School';
+                  const cPerson = enq.contact_person || enq.contactPerson || enq.contact || 'School Representative';
+                  const desig = enq.designation || 'Staff';
+                  const loc = enq.location || 'Chennai';
+                  const phoneNum = enq.phone || enq.phoneNumber || '';
+                  const targetCls = enq.classes_interested || enq.classesInterested || 'Classes 6–9';
+                  const strength = enq.student_strength || enq.studentStrength;
+                  const prefDate = enq.preferred_date || enq.preferredDate;
+                  const createdDate = enq.created_at || enq.createdAt || enq.timestamp;
+                  const statusVal = enq.enquiry_status || enq.status || 'New';
+
+                  return (
+                    <tr key={enq.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="py-3.5 px-4">
+                        <strong className="block font-bold text-navy-900 text-sm">{sName}</strong>
+                        <span className="text-slate-500 flex items-center gap-1 mt-0.5">
+                          <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                          {loc}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="font-semibold text-slate-900 block">{cPerson}</span>
+                        <span className="text-slate-500 text-[11px] block">{desig}</span>
+                        {phoneNum ? (
+                          <a href={`tel:${phoneNum}`} className="text-blue-600 hover:underline text-[11px] block">
+                            {phoneNum}
+                          </a>
+                        ) : (
+                          <span className="text-slate-400 text-[11px]">No phone</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="block font-medium text-slate-800">{targetCls}</span>
+                        <span className="text-slate-400 text-[11px]">
+                          {strength ? `${strength} students` : 'Strength flexible'}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className="font-mono text-slate-700 block">
+                          {prefDate && !isNaN(new Date(prefDate).getTime()) ? new Date(prefDate).toLocaleDateString() : 'Flexible'}
+                        </span>
+                        <span className="text-[10px] text-slate-400">
+                          {createdDate && !isNaN(new Date(createdDate).getTime()) ? `Received ${new Date(createdDate).toLocaleDateString()}` : 'Date recorded'}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4">
+                        <span className={`inline-block px-2.5 py-1 rounded-full text-[11px] font-bold border ${getStatusBadge(statusVal)}`}>
+                          {statusVal}
+                        </span>
+                      </td>
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => openViewModal(enq)}
+                            className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                            title="View & Edit Status"
+                          >
+                            <Edit3 className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(enq.id, sName)}
+                            className="p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors"
+                            title="Delete Record"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
@@ -288,7 +310,9 @@ export default function EnquiriesManager() {
             <div className="flex items-center justify-between border-b pb-4">
               <div>
                 <span className="text-xs font-bold text-blue-600 uppercase">Enquiry ID #{selectedEnquiry.id}</span>
-                <h3 className="text-xl font-bold text-navy-900 mt-0.5">{selectedEnquiry.school_name}</h3>
+                <h3 className="text-xl font-bold text-navy-900 mt-0.5">
+                  {selectedEnquiry.school_name || selectedEnquiry.schoolName || selectedEnquiry.school || 'School Enquiry'}
+                </h3>
               </div>
               <button onClick={() => setEditModal(false)} className="p-1 text-slate-400 hover:text-slate-800">
                 <X className="w-5 h-5" />
@@ -299,37 +323,52 @@ export default function EnquiriesManager() {
             <div className="grid grid-cols-2 gap-4 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Contact Person:</strong>
-                <span className="font-semibold text-slate-900">{selectedEnquiry.contact_person} ({selectedEnquiry.designation})</span>
+                <span className="font-semibold text-slate-900">
+                  {selectedEnquiry.contact_person || selectedEnquiry.contactPerson || selectedEnquiry.contact || 'N/A'} 
+                  ({selectedEnquiry.designation || 'Staff'})
+                </span>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Location:</strong>
-                <span className="font-semibold text-slate-900">{selectedEnquiry.location}</span>
+                <span className="font-semibold text-slate-900">{selectedEnquiry.location || 'Chennai'}</span>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Official Email:</strong>
-                <a href={`mailto:${selectedEnquiry.email}`} className="text-blue-600 hover:underline">{selectedEnquiry.email}</a>
+                <a href={`mailto:${selectedEnquiry.email}`} className="text-blue-600 hover:underline">{selectedEnquiry.email || 'N/A'}</a>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Phone:</strong>
-                <a href={`tel:${selectedEnquiry.phone}`} className="text-blue-600 hover:underline">{selectedEnquiry.phone}</a>
+                <a href={`tel:${selectedEnquiry.phone || selectedEnquiry.phoneNumber}`} className="text-blue-600 hover:underline">
+                  {selectedEnquiry.phone || selectedEnquiry.phoneNumber || 'N/A'}
+                </a>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Target Classes:</strong>
-                <span className="font-semibold text-slate-900">{selectedEnquiry.classes_interested || 'Classes 6–9'}</span>
+                <span className="font-semibold text-slate-900">
+                  {selectedEnquiry.classes_interested || selectedEnquiry.classesInterested || 'Classes 6–9'}
+                </span>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Expected Student Strength:</strong>
-                <span className="font-semibold text-slate-900">{selectedEnquiry.student_strength || 'Not specified'}</span>
+                <span className="font-semibold text-slate-900">
+                  {selectedEnquiry.student_strength || selectedEnquiry.studentStrength || 'Not specified'}
+                </span>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Preferred Demonstration Date:</strong>
                 <span className="font-semibold text-slate-900">
-                  {selectedEnquiry.preferred_date ? new Date(selectedEnquiry.preferred_date).toLocaleDateString() : 'Flexible'}
+                  {(selectedEnquiry.preferred_date || selectedEnquiry.preferredDate) && !isNaN(new Date(selectedEnquiry.preferred_date || selectedEnquiry.preferredDate).getTime())
+                    ? new Date(selectedEnquiry.preferred_date || selectedEnquiry.preferredDate).toLocaleDateString()
+                    : 'Flexible'}
                 </span>
               </div>
               <div>
                 <strong className="text-slate-500 block uppercase text-[10px]">Submitted At:</strong>
-                <span className="font-semibold text-slate-900">{new Date(selectedEnquiry.created_at).toLocaleString()}</span>
+                <span className="font-semibold text-slate-900">
+                  {(selectedEnquiry.created_at || selectedEnquiry.createdAt || selectedEnquiry.timestamp) && !isNaN(new Date(selectedEnquiry.created_at || selectedEnquiry.createdAt || selectedEnquiry.timestamp).getTime())
+                    ? new Date(selectedEnquiry.created_at || selectedEnquiry.createdAt || selectedEnquiry.timestamp).toLocaleString()
+                    : 'Recorded'}
+                </span>
               </div>
             </div>
 

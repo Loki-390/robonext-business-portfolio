@@ -156,32 +156,41 @@ export default function AdminDashboard() {
                 No school enquiries recorded yet.
               </div>
             ) : (
-              recentEnquiries.map((enq) => (
-                <div key={enq.id} className="p-4 sm:px-6 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4">
-                  <div className="space-y-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h4 className="font-bold text-sm text-navy-900 truncate">{enq.school_name}</h4>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${getStatusBadge(enq.enquiry_status)}`}>
-                        {enq.enquiry_status}
-                      </span>
-                    </div>
-                    <div className="text-xs text-slate-500 flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <span>{enq.contact_person} ({enq.designation})</span>
-                      <span>&bull;</span>
-                      <span>{enq.location}</span>
-                      <span>&bull;</span>
-                      <span>Target: {enq.classes_interested || 'Classes 6–9'}</span>
-                    </div>
-                  </div>
+              recentEnquiries.map((enq) => {
+                const sName = enq.school_name || enq.schoolName || enq.school || 'School Enquiry';
+                const cPerson = enq.contact_person || enq.contactPerson || enq.contact || 'Representative';
+                const desig = enq.designation || 'Staff';
+                const loc = enq.location || 'Chennai';
+                const statusVal = enq.enquiry_status || enq.status || 'New';
+                const targetCls = enq.classes_interested || enq.classesInterested || 'Classes 6–9';
 
-                  <Link
-                    to="/admin/enquiries"
-                    className="shrink-0 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors"
-                  >
-                    Details &rarr;
-                  </Link>
-                </div>
-              ))
+                return (
+                  <div key={enq.id} className="p-4 sm:px-6 hover:bg-slate-50 transition-colors flex items-center justify-between gap-4">
+                    <div className="space-y-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-bold text-sm text-navy-900 truncate">{sName}</h4>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${getStatusBadge(statusVal)}`}>
+                          {statusVal}
+                        </span>
+                      </div>
+                      <div className="text-xs text-slate-500 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span>{cPerson} ({desig})</span>
+                        <span>&bull;</span>
+                        <span>{loc}</span>
+                        <span>&bull;</span>
+                        <span>Target: {targetCls}</span>
+                      </div>
+                    </div>
+
+                    <Link
+                      to="/admin/enquiries"
+                      className="shrink-0 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-colors"
+                    >
+                      Details &rarr;
+                    </Link>
+                  </div>
+                );
+              })
             )}
           </div>
         </div>

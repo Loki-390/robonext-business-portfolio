@@ -183,15 +183,21 @@ export default function ProjectsManager() {
                     {proj.status}
                   </span>
                   <span className="text-[11px] font-semibold text-slate-500">
-                    {proj.category}
+                    {proj.category || 'Robotics'}
                   </span>
                 </div>
 
-                <h3 className="font-bold text-base text-navy-900">{proj.project_name}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">{proj.description}</p>
+                <h3 className="font-bold text-base text-navy-900">
+                  {proj.project_name || proj.name || proj.title || 'Robotics Project'}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                  {proj.description || 'Hands-on practical robotics project build.'}
+                </p>
 
                 <div className="pt-2 text-xs text-slate-500 space-y-1">
-                  <p className="line-clamp-2"><strong>Tech:</strong> {proj.technologies}</p>
+                  <p className="line-clamp-2">
+                    <strong>Tech:</strong> {proj.technologies || proj.tech || 'Arduino, Sensors, Motor Drivers'}
+                  </p>
                 </div>
               </div>
 
