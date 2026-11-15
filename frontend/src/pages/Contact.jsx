@@ -422,6 +422,19 @@ export default function Contact() {
                         </>
                       )}
                     </button>
+
+
+
+                    {/* 🚀 Waking-Up Animation / Popup Message */}
+      {loading && (
+        <div className="flex items-center gap-3 text-blue-300 text-xs sm:text-sm animate-pulse bg-blue-950/60 p-3 rounded-lg border border-blue-500/30">
+          <Loader2 className="w-5 h-5 animate-spin text-blue-400 shrink-0" />
+          <span>Submitting request... (Server is waking up from sleep mode, please wait ~30 seconds).</span>
+        </div>
+      )}
+
+
+      
                     <p className="text-center text-xs text-slate-500 mt-2">
                       🔒 Data saved securely in our database. An automated acknowledgement email will be sent immediately.
                     </p>
