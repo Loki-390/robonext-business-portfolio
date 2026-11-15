@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { Cpu, Mail, Phone, MapPin, Download, ShieldCheck, ExternalLink, Lock } from 'lucide-react';
 
 export default function Footer({ onOpenDemoModal }) {
-  // Corrected download handler using root-level static asset path
-  const handleDownload = (fileName) => {
+  // Root-level static asset download handler with custom filename support
+  const handleDownload = (fileUrl, downloadName) => {
     const link = document.createElement('a');
-    link.href = `/${fileName}`;
-    link.download = fileName;
+    link.href = encodeURI(fileUrl);
+    link.download = downloadName || fileUrl.split('/').pop();
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -91,21 +91,23 @@ export default function Footer({ onOpenDemoModal }) {
             <div className="mt-6 pt-4 border-t border-navy-850 space-y-2">
               <span className="text-xs text-slate-400 font-semibold uppercase block">Downloads (School Packets)</span>
               
-              {/* Corrected Download 1 */}
+              {/* Download 1: Company Profile */}
               <button
-                onClick={() => handleDownload('Founder Profile.pdf')}
+                onClick={() => handleDownload('/Founder Profile.pdf', 'Company Profile.pdf')}
                 className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors"
+                title="Download Founder & Company Profile PDF"
               >
-                <span>Founder Profile</span>
+                <span>Company Profile</span>
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
               </button>
 
-              {/* Corrected Download 2 */}
+              {/* Download 2: Robotics Curriculum Outline */}
               <button
-                onClick={() => handleDownload('RoboNext Robotics Programme Brochure.pdf')}
+                onClick={() => handleDownload('/RoboNext Robotics Programme Brochure.pdf', 'Robotics Curriculum Outline.pdf')}
                 className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors"
+                title="Download Robotics Curriculum & Programme Brochure PDF"
               >
-                <span>Robotics Programme Brochure</span>
+                <span>Robotics Curriculum Outline</span>
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
               </button>
             </div>

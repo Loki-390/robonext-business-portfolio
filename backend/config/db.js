@@ -40,8 +40,9 @@ const poolConfig = process.env.DATABASE_URL
 const pool = mysql.createPool(poolConfig);
 
 async function initDatabase() {
-  const connection = await pool.getConnection();
+  let connection;
   try {
+    connection = await pool.getConnection();
     console.log('[DB] Connected successfully to TiDB Cloud (robotics_portfolio)');
 
     // Create admin_users table if it doesn't exist
@@ -95,7 +96,7 @@ async function initDatabase() {
   } catch (dbErr) {
     console.error('[DB INIT WARNING]:', dbErr.message);
   } finally {
-    connection.release();
+    if (connection) connection.release();
   }
 }
 
