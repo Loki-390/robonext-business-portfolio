@@ -96,7 +96,7 @@ export default function Footer({ onOpenDemoModal }) {
                 onClick={() => handleDownload('Founder Profile.pdf')}
                 className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors"
               >
-                <span>Company Profile</span>
+                <span>Founder Profile</span>
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
               </button>
 
@@ -105,7 +105,7 @@ export default function Footer({ onOpenDemoModal }) {
                 onClick={() => handleDownload('RoboNext Robotics Programme Brochure.pdf')}
                 className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors"
               >
-                <span>Robotics Curriculum Outline</span>
+                <span>Robotics Programme Brochure</span>
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
               </button>
             </div>
