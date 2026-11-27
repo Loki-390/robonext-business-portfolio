@@ -1,18 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Cpu, Mail, Phone, MapPin, Download, ShieldCheck, ExternalLink, Lock } from 'lucide-react';
+import { Cpu, Mail, Phone, MapPin, Download, Lock } from 'lucide-react';
 
 export default function Footer({ onOpenDemoModal }) {
-  // Root-level static asset download handler with custom filename support
-  const handleDownload = (fileUrl, downloadName) => {
-    const link = document.createElement('a');
-    link.href = encodeURI(fileUrl);
-    link.download = downloadName || fileUrl.split('/').pop();
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <footer className="bg-navy-950 text-slate-300 border-t border-navy-800">
       {/* Pre-footer Callout */}
@@ -92,24 +82,26 @@ export default function Footer({ onOpenDemoModal }) {
               <span className="text-xs text-slate-400 font-semibold uppercase block">Downloads (School Packets)</span>
               
               {/* Download 1: Company Profile */}
-              <button
-                onClick={() => handleDownload('/Founder Profile.pdf', 'Company Profile.pdf')}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors"
+              <a
+                href="/Founder Profile.pdf"
+                download="RoboNext_Company_Profile.pdf"
+                className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors cursor-pointer"
                 title="Download Founder & Company Profile PDF"
               >
                 <span>Company Profile</span>
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
-              </button>
+              </a>
 
               {/* Download 2: Robotics Curriculum Outline */}
-              <button
-                onClick={() => handleDownload('/RoboNext Robotics Programme Brochure.pdf', 'Robotics Curriculum Outline.pdf')}
-                className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors"
+              <a
+                href="/RoboNext Robotics Programme Brochure.pdf"
+                download="RoboNext_Curriculum_Outline.pdf"
+                className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors cursor-pointer"
                 title="Download Robotics Curriculum & Programme Brochure PDF"
               >
                 <span>Robotics Curriculum Outline</span>
                 <Download className="w-3.5 h-3.5 text-cyan-400" />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -134,7 +126,7 @@ export default function Footer({ onOpenDemoModal }) {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-cyan-400 shrink-0" />
-                <a href="tel:+91 75984 10327" className="text-slate-300 hover:text-white transition-colors">
+                <a href="tel:+917598410327" className="text-slate-300 hover:text-white transition-colors">
                   +91 75984 10327
                 </a>
               </div>
