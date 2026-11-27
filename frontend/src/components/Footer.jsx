@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Cpu, Mail, Phone, MapPin, Download, Lock } from 'lucide-react';
+import { Cpu, Mail, Phone, MapPin, Lock, ExternalLink } from 'lucide-react';
 
 export default function Footer({ onOpenDemoModal }) {
+  const COMPANY_PROFILE_URL = "https://drive.google.com/file/d/1pp0FBXj_bzDAsBpSOR8D-2S7ddcVH6Ab/view?usp=sharing";
+  const CURRICULUM_BROCHURE_URL = "https://drive.google.com/file/d/1UTC7t5kkjPw5M8o1T5LL_Ziq7KoNa-Dg/view?usp=sharing";
+
   return (
     <footer className="bg-navy-950 text-slate-300 border-t border-navy-800">
       {/* Pre-footer Callout */}
@@ -83,24 +86,26 @@ export default function Footer({ onOpenDemoModal }) {
               
               {/* Download 1: Company Profile */}
               <a
-                href="/Founder Profile.pdf"
-                download="RoboNext_Company_Profile.pdf"
+                href={COMPANY_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors cursor-pointer"
-                title="Download Founder & Company Profile PDF"
+                title="View & Download Founder & Company Profile PDF"
               >
                 <span>Company Profile</span>
-                <Download className="w-3.5 h-3.5 text-cyan-400" />
+                <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
               </a>
 
               {/* Download 2: Robotics Curriculum Outline */}
               <a
-                href="/RoboNext Robotics Programme Brochure.pdf"
-                download="RoboNext_Curriculum_Outline.pdf"
+                href={CURRICULUM_BROCHURE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full flex items-center justify-between px-3 py-2 text-xs rounded bg-navy-900 hover:bg-navy-850 text-slate-200 border border-navy-800 transition-colors cursor-pointer"
-                title="Download Robotics Curriculum & Programme Brochure PDF"
+                title="View & Download Robotics Curriculum & Programme Brochure PDF"
               >
                 <span>Robotics Curriculum Outline</span>
-                <Download className="w-3.5 h-3.5 text-cyan-400" />
+                <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
               </a>
             </div>
           </div>
